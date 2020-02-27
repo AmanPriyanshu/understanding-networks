@@ -9,4 +9,5 @@ def docker_install():
   os.system('sudo apt-get install -y docker-ce')
   print("Checking that it’s running:")
   os.system('sudo systemctl status docker')
+  os.system('sudo usermod -aG docker $USER')
 docker_install()

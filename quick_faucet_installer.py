@@ -26,3 +26,4 @@ def main():
   else:
     faucet_downloader(permissions)
   print('Installation complete')
+main()

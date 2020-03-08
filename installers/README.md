@@ -3,7 +3,8 @@
 
 #### Followed tutorial from: https://www.hostinger.in/tutorials/how-to-install-and-use-docker-on-ubuntu/
 
-#### Refer code documentation for further clarification. However it simply downloads and installs #### Docker from:
+#### Refer code documentation for further clarification. However it simply downloads and installs 
+#### Docker from:
 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 

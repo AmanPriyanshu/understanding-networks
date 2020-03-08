@@ -8,6 +8,8 @@ os.system('sudo add-apt-repository "deb [arch=amd64] https://download.docker.com
 os.system('sudo apt update')
 os.system('sudo apt install docker-ce')
 os.system('sudo systemctl status docker')
+os.system('sudo apt install openvswitch-switch')
+os.system('sudo apt install net-tools')
 time.sleep(1000)
 os.system('clear')
 print("Docker Installation Complete")

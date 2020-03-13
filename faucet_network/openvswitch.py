@@ -9,10 +9,45 @@ os.system('sudo ovs-vsctl set bridge ovs-br1 fail_mode=secure')
 os.system('sudo ovs-vsctl set-controller ovs-br1 tcp:127.0.0.1:6653')
 os.system('sudo ovs-ofctl show -O OpenFlow13 ovs-br1')
 print("DONE")
-#os.system('sudo docker run -it --name box1 --network=none ubuntu /bin/sh')
-#os.system('sudo docker run -it --name box2 --network=none ubuntu /bin/sh')
-#os.system('sudo docker run -it --name  faucetctl --network=host faucet/faucet /bin/sh')
+#sudo docker run -it --name box1 ubuntu:16.04 /bin/sh
+#sudo docker run -it --name box2 ubuntu:16.04 /bin/sh
+
+## Install ping and ifconfig using
+'''
+apt-get update
+apt-get install iputils-ping
+apt-get install net-tools
+'''
+
+## Modify faucet.yaml file using:
+'''
+vi etc/faucet/faucet.yaml
+vlans:
+    lab:
+        vid: 100
+        description: "lab network"
+        unicast_flood: True       
+dps:                       
+    Open vSwitch:
+        dp_id: 0x000012579719c04a
+        hardware: "Open vSwitch" 
+        interfaces:             
+            1:     
+                name: "h1"
+                description: "host1 container"
+                native_vlan: lab              
+            2:                  
+                name: "h2"
+                description: "host2 container"
+                native_vlan: lab              
+            3:                  
+                name: "Poseidon"
+                description: "Mirrors Traffic of port 2 to Poseidon"
+                native_vlan: lab
+
+'''
+#sudo docker run -it --name faucetctl --network=host faucet/faucet /bin/bash
 os.system('sudo ovs-docker add-port ovs-br1 eth0 box1 --ipaddress=173.16.1.2/24')
 os.system('sudo ovs-docker add-port ovs-br1 eth0 box2 --ipaddress=173.16.1.3/24')
-os.system('sudo ovs-vsctl del-br ovs-br1')
+
 print("BRIDGES CREATED")

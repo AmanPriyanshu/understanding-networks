@@ -48,15 +48,17 @@ dps:
 acls:
     block-ping:
         - rule:
-            dl_type: 0x800      # IPv4
-            ip_proto: 1         # ICMP
+            dl_type: 0x800
+            ip_proto: 1
             actions:
                 allow: False
+                mirror: 3
         - rule:
-            dl_type: 0x86dd     # IPv6
-            ip_proto: 58        # ICMPv6
+            dl_type: 0x86dd
+            ip_proto: 58
             actions:
                 allow: False
+                mirror: 3
 
 
 '''

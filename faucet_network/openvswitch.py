@@ -39,11 +39,25 @@ dps:
             2:                  
                 name: "h2"
                 description: "host2 container"
-                native_vlan: lab              
+                native_vlan: lab
+                acls_in: [block-ping]           
             3:                  
                 name: "Poseidon"
                 description: "Mirrors Traffic of port 2 to Poseidon"
                 native_vlan: lab
+acls:
+    block-ping:
+        - rule:
+            dl_type: 0x800      # IPv4
+            ip_proto: 1         # ICMP
+            actions:
+                allow: False
+        - rule:
+            dl_type: 0x86dd     # IPv6
+            ip_proto: 58        # ICMPv6
+            actions:
+                allow: False
+
 
 '''
 #sudo docker run -it --name faucetctl --network=host faucet/faucet /bin/bash
